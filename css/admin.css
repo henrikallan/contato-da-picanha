@@ -1,0 +1,198 @@
+/* ============================================================
+   CONTATO DA PICANHA — css/admin.css
+   Estilos exclusivos da área do lojista (admin.html).
+   Reaproveita as variáveis definidas em css/style.css.
+============================================================ */
+
+.admin-body{ min-height: 100vh; }
+
+.admin-header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 3rem);
+  background: rgba(12,9,7,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.admin-header-right{ display:flex; align-items:center; gap: 1rem; }
+.admin-back-link{
+  font-family: var(--cond);
+  font-size: .9rem;
+  color: var(--text-dim);
+  transition: color .2s;
+}
+.admin-back-link:hover{ color: var(--ember-2); }
+.admin-logout-btn{ padding: .5rem 1.1rem; font-size: .85rem; }
+
+.admin-main{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2.5rem clamp(1rem, 4vw, 2rem) 5rem;
+  display:flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.admin-notice{
+  background: var(--panel);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1rem 1.3rem;
+  font-size: .92rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.admin-notice strong{ color: var(--gold); }
+.admin-notice code{
+  background: var(--panel-2);
+  border-radius: 4px;
+  padding: .1rem .4rem;
+  font-size: .88em;
+}
+
+.admin-card{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+}
+.admin-card h2{
+  font-size: 1.4rem;
+  color: var(--ember-2);
+  margin-bottom: .6rem;
+}
+.admin-sub{ color: var(--text-dim); font-size: .92rem; margin-bottom: 1rem; }
+
+.admin-card form label{
+  display:flex;
+  flex-direction: column;
+  gap: .3rem;
+  font-family: var(--cond);
+  font-size: .8rem;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: .9rem;
+}
+.admin-card input[type="text"],
+.admin-card input[type="password"],
+.admin-card input[type="tel"]{
+  font-family: var(--body);
+  font-size: .95rem;
+  text-transform: none;
+  letter-spacing: 0;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: .6rem .8rem;
+  color: var(--text);
+}
+.admin-card input:focus{ outline: none; border-color: var(--ember); }
+
+.admin-error{ color: #ff8a7a; font-size: .88rem; min-height: 1.2em; margin: .4rem 0; }
+.admin-ok{ color: var(--gold); font-size: .88rem; min-height: 1.2em; margin: .4rem 0; }
+.admin-warning{
+  font-size: .82rem;
+  color: var(--text-faint);
+  border-top: 1px dashed var(--line);
+  padding-top: .9rem;
+  margin-top: .5rem;
+  line-height: 1.5;
+}
+
+.admin-inline-form{
+  display:flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  align-items: center;
+}
+.admin-inline-form input{
+  flex: 1;
+  min-width: 160px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: .6rem .8rem;
+  color: var(--text);
+  font-family: var(--body);
+}
+
+/* ---------- lista de produtos editável ---------- */
+.admin-product-list{ display:flex; flex-direction: column; gap: .9rem; margin-bottom: 1rem; }
+.admin-product-row{
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  display:flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  transition: border-color .3s, background .3s;
+}
+.admin-product-row.saved-flash{ border-color: var(--gold); background: rgba(232,179,77,.08); }
+.admin-product-row.admin-row-soldout{ border-color: rgba(199,58,36,.4); }
+.admin-checkbox-label{
+  flex-direction: row !important;
+  align-items: center;
+  gap: .5rem !important;
+  font-family: var(--body) !important;
+  font-size: .88rem !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  color: var(--text-dim) !important;
+  align-self: end;
+}
+.admin-checkbox-label input[type="checkbox"]{
+  width: 16px;
+  height: 16px;
+  accent-color: var(--braise);
+}
+.admin-product-fields{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: .7rem;
+  flex: 1;
+}
+.admin-product-fields label{ margin-bottom: 0; }
+.admin-product-actions{ display:flex; gap: .5rem; flex-shrink: 0; }
+.btn-small{ padding: .5rem .9rem; font-size: .78rem; }
+
+.admin-add-product{
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+.admin-add-product summary{
+  cursor: pointer;
+  font-family: var(--cond);
+  font-weight: 600;
+  color: var(--ember-2);
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  font-size: .9rem;
+}
+.admin-add-form{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: .7rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+.admin-add-form input{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: .6rem .8rem;
+  color: var(--text);
+  font-family: var(--body);
+}
+.admin-add-form button{ grid-column: 1 / -1; justify-self: start; }
+
+.admin-export-card{ text-align: center; }
+.admin-export-card .btn{ margin-top: .5rem; }

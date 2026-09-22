@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato da Picanha</title>
+  <meta name="description"
+    content="Contato da Picanha - Os melhores cortes e kits para churrasco em Contagem, MG. Chama o Garcez!">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="grain"></div>
+
+  <header>
+    <div class="logo"><span class=</span> Contato <span>da Picanha</span></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <ul id="navList">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#avaliacoes">Avaliações</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  <div class="header-actions">
+    <button class="search-toggle" id="searchToggle" aria-label="Buscar produtos">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    </button>
+    <button class="cart-toggle" id="cartToggle" aria-label="Abrir carrinho">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none"/><path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <a class="nav-cta" href="https://api.whatsapp.com/send?phone=5531992657190" target="_blank" rel="noopener">Chamar o Garcez</a>
+  </div>
+</header>
+
+  <!-- CARRINHO -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-drawer-head">
+      <h3>Seu carrinho</h3>
+      <button class="cart-close" id="cartClose" aria-label="Fechar carrinho">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <p class="cart-empty" id="cartEmpty">Seu carrinho está vazio. Adicione produtos ou kits pelo menu.</p>
+      <div class="cart-footer">
+      <div class="cart-total-row"><span id="cartTotalLabel">Total</span><strong id="cartTotal">R$0,00</strong></div>
+      <div class="delivery-choice" id="deliveryChoice">
+        <span class="delivery-choice-label">Como você quer receber?</span>
+        <div class="delivery-choice-options">
+          <button type="button" class="delivery-option" data-method="retirada">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9h16v11H4z"/><path d="M9 20v-6h6v6"/></svg>
+            Retirar no local
+          </button>
+          <button type="button" class="delivery-option" data-method="entrega">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 10h13v7H1z"/><path d="M14 13h4l4 3v1h-8z"/><circle cx="6" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+            Entrega
+          </button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary cart-checkout-btn" id="cartCheckoutBtn">Finalizar pedido no
+        WhatsApp</button>
+    </div>
+  </aside>
+
+    <!-- ALERTA: ITENS VENDIDOS POR PESO -->
+  <div class="modal-overlay" id="weightAlertOverlay">
+    <div class="modal-box">
+      <span class="eyebrow">Antes de continuar</span>
+      <h3>Itens vendidos por peso (kg)</h3>
+            <p class="modal-sub">serão pesados na loja — o valor final de cada item e total do pedido, será calculado após a pesagem.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-primary" id="weightAlertOk">Entendi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CADASTRO RÁPIDO (nome + telefone) -->
+  <div class="modal-overlay" id="registerOverlay">
+    <div class="modal-box">
+      <span class="eyebrow">Só mais um passo</span>
+      <h3>Como podemos te chamar?</h3>
+      <p class="modal-sub">Precisamos só do seu nome e telefone pra montar seu pedido no WhatsApp.</p>
+      <form id="registerForm">
+        <label>Nome
+          <input type="text" name="registerName" id="registerName" required autocomplete="name">
+        </label>
+                <label>Telefone / WhatsApp
+          <input type="tel" name="registerPhone" id="registerPhone" required autocomplete="tel"
+            placeholder="(31) 90000-0000">
+        </label>
+                <label id="registerAddressGroup" class="register-field-hidden">Endereço para entrega
+          <textarea name="registerAddress" id="registerAddress" rows="2"
+            placeholder="Rua, número, bairro, cidade, ponto de referência..." autocomplete="off"></textarea>
+          <span class="register-address-hint">🚚 Digite seu endereço e enviaremos o valor do frete.</span>
+        </label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" id="registerCancel">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Continuar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- VISUALIZAÇÃO AMPLIADA DO PRODUTO -->
+  <div class="modal-overlay product-modal-overlay" id="productModalOverlay">
+    <button type="button" class="product-modal-nav-arrow product-modal-nav-prev" id="productModalPrevProduct"
+      aria-label="Produto anterior" hidden>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
+    <button type="button" class="product-modal-nav-arrow product-modal-nav-next" id="productModalNextProduct"
+      aria-label="Próximo produto" hidden>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </button>
+    <div class="modal-box product-modal-box">
+      <button type="button" class="modal-close-x" id="productModalClose" aria-label="Fechar">&times;</button>
+      <div class="product-card product-modal-card">
+        <div class="product-modal-images" id="productModalImages">
+          <div class="product-modal-track" id="productModalTrack">
+            <div class="product-media">
+              <img class="product-photo" id="productModalImg1" src="" alt="">
+
+              <span class="product-tag" id="productModalTag"></span>
+            </div>
+            <div class="product-media" id="productModalSlide2">
+              <img class="product-photo" id="productModalImg2" src="" alt="">
+
+            </div>
+          </div>
+          <button type="button" class="product-modal-arrow product-modal-prev" id="productModalPrev"
+            aria-label="Imagem anterior">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button type="button" class="product-modal-arrow product-modal-next" id="productModalNext"
+            aria-label="Próxima imagem">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+          <div class="product-modal-dots" id="productModalDots">
+            <button type="button" class="product-modal-dot" data-index="0" aria-label="Ir para imagem 1"></button>
+            <button type="button" class="product-modal-dot" data-index="1" aria-label="Ir para imagem 2"></button>
+          </div>
+        </div>
+        <div class="product-body">
+          <h4 class="product-name" id="productModalName"></h4>
+          <p class="product-modal-desc" id="productModalDesc"></p>
+          <p class="product-meta" id="productModalMeta"></p>
+          <div class="variant-picker" id="productModalVariants" hidden>
+            <div class="variant-group" id="variantBrandGroup">
+              <span class="variant-label">Marca</span>
+              <div class="variant-options" id="variantBrandOptions"></div>
+          </div>
+            <div class="variant-group" id="variantFlavorGroup" hidden>
+            <div class="variant-label-row">
+              <span class="variant-label" id="variantFlavorLabel">Sabor</span>
+              <div class="variant-step-nav">
+                <button type="button" class="variant-step-btn" id="variantFlavorPrev" aria-label="Sabor anterior">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button type="button" class="variant-step-btn" id="variantFlavorNext" aria-label="Próximo sabor">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="variant-options" id="variantFlavorOptions"></div>
+          </div>
+        </div>
+          <div class="product-footer">
+            <span class="product-price" id="productModalPrice"></span>
+            <button type="button" class="product-cta" id="productModalAddBtn" aria-label="Adicionar ao carrinho">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISUALIZAÇÃO AMPLIADA DO KIT -->
+  <div class="modal-overlay kit-modal-overlay" id="kitModalOverlay">
+    <button type="button" class="product-modal-nav-arrow product-modal-nav-prev" id="kitModalPrevKit"
+      aria-label="Kit anterior">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
+    <button type="button" class="product-modal-nav-arrow product-modal-nav-next" id="kitModalNextKit"
+      aria-label="Próximo kit">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </button>
+    <div class="modal-box product-modal-box kit-modal-box">
+      <button type="button" class="modal-close-x" id="kitModalClose" aria-label="Fechar">&times;</button>
+      <div class="product-card product-modal-card">
+        <div class="product-media kit-modal-media">
+          <img class="product-photo" id="kitModalImg" src="" alt="">
+          <span class="product-flame" aria-hidden="true">🔥</span>
+        </div>
+        <div class="product-body">
+          <span class="kit-people" id="kitModalPeople"></span>
+          <h4 class="product-name kit-modal-name" id="kitModalName"></h4>
+          <ul class="kit-modal-list" id="kitModalList"></ul>
+          <div class="product-footer">
+            <span class="kit-price" id="kitModalPrice"></span>
+            <button type="button" class="kit-cta kit-modal-add-btn" id="kitModalAddBtn">Adicionar ao carrinho</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUSCA -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <button type="button" class="search-close-x" id="searchClose" aria-label="Fechar busca">&times;</button>
+      <div class="search-input-wrap">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.3-4.3" />
+        </svg>
+        <input type="text" id="searchInput" class="search-input"
+          placeholder="Buscar produto (ex.: fraldinha, carvão, pão de alho...)" autocomplete="off">
+      </div>
+      <div class="search-results" id="searchResults">
+        <p class="search-hint">Digite para buscar em todo o cardápio.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero-banner">
+    <div class="hero-banner-track" id="heroBannerTrack">
+      <div class="hero-banner-slide">
+        <img src="images/banner/banner-1.jpg" alt="Contato da Picanha" loading="eager">
+      </div>
+      <div class="hero-banner-slide">
+        <img src="images/banner/banner-2.jpg" alt="Contato da Picanha" loading="lazy">
+      </div>
+      <div class="hero-banner-slide">
+        <img src="images/banner/banner-3.jpg" alt="Contato da Picanha" loading="lazy">
+      </div>
+      <div class="hero-banner-slide">
+        <img src="images/banner/banner-4.jpg" alt="Contato da Picanha" loading="lazy">
+      </div>
+    </div>
+    <div class="hero-banner-overlay"></div>
+
+    <button type="button" class="hero-banner-arrow hero-banner-prev" id="heroBannerPrev" aria-label="Imagem anterior">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
+    <button type="button" class="hero-banner-arrow hero-banner-next" id="heroBannerNext" aria-label="Próxima imagem">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </button>
+
+    <div class="hero-banner-dots" id="heroBannerDots">
+      <button type="button" class="hero-banner-dot active" data-index="0" aria-label="Ir para imagem 1"></button>
+      <button type="button" class="hero-banner-dot" data-index="1" aria-label="Ir para imagem 2"></button>
+      <button type="button" class="hero-banner-dot" data-index="2" aria-label="Ir para imagem 3"></button>
+      <button type="button" class="hero-banner-dot" data-index="3" aria-label="Ir para imagem 4"></button>
+    </div>
+
+    <div class="hero-banner-cta">
+      <a class="btn btn-primary" href="#menu">Ver o menu</a>
+    </div>
+  </section>
+
+  <section id="menu" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">Cortes selecionados</span>
+      <h2>Menu &amp; Destaques</h2>
+    </div>
+
+    <div class="cat-nav">
+      <a href="#cat-picanhas">Picanhas</a>
+      <a href="#cat-bovinos">Bovinos</a>
+      <a href="#cat-suinos">Suínos</a>
+      <a href="#cat-aves">Aves</a>
+      <a href="#cat-diversos">Diversos</a>
+      <a href="#cat-sais">Sais</a>
+      <a href="#cat-molhos">Molhos</a>
+      <a href="#cat-kits">Kits para Churrasco</a>
+    </div>
+
+    <div class="menu-categories">
+
+      <!-- PICANHAS DA SEMANA -->
+      <div class="category-block" id="cat-picanhas">
+        <div class="category-title">
+          <h3>Picanhas da Semana</h3>
+          <div class="rule"></div>
+          <span class="cat-count">Nacional &amp; Importada</span>
+        </div>
+        <div class="cards-grid" data-category="picanhas">
+
+          <div class="product-card" data-key="picanhas:frigol">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/frigol.png" alt="Frigol" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Frigol</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>89,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:pul">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/pul.png" alt="Pul" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Pul</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>109,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:chef">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/chef.png" alt="Chef" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Chef</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>109,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:estancia-92">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/estancia-92.png" alt="Estância 92"
+                loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Estância 92</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>139,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:bassi">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/bassi.png" alt="Bassi" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Bassi</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>144,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:brasa">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/brasa.png" alt="Brasa" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Brasa</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>114,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:dimeza">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/dimeza.png" alt="Dimeza" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Dimeza</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>117,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:guarani">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/guarani.png" alt="Guarani" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Guarani</h4>
+              <p class="product-meta">Paraguaia · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>127,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="product-card" data-key="picanhas:fire">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/fire.png" alt="Fire" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Fire</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>119,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:baby-novilho">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/baby-novilho.png" alt="Baby Novilho"
+                loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Baby Novilho</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>119,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:diprima">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/diprima.png" alt="Diprima" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Diprima</h4>
+              <p class="product-meta">Nacional · Resfriada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>119,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:cabana-las-lilas">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/cabana-las-lilas.png" alt="Cabaña Las Lilas"
+                loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Cabaña Las Lilas</h4>
+              <p class="product-meta">Uruguaia · Congelada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>132,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:los lazos">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/los-lazos.png" alt="Los Lazos" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Los Lazos</h4>
+              <p class="product-meta">Uruguaia · Congelada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>132,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="picanhas:selecao-contato">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/picanhas/selecao-contato.png" alt="Seleção Contato 500g"
+                loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Seleção Contato 500g</h4>
+              <p class="product-meta">Nacional · Congelada</p>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>69,90<em>/bdj</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOVINOS -->
+      <div class="category-block" id="cat-bovinos">
+        <div class="category-title">
+          <h3>Bovinos</h3>
+          <div class="rule"></div>
+          <span class="cat-count">Cortes Nobres</span>
+        </div>
+        <div class="cards-grid" data-category="bovinos">
+
+          <div class="product-card" data-key="bovinos:chorizo-estancia-92">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/chorizo-estancia-92.png"
+               alt="Chorizo Estância 92" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Chorizo Estância 92</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>79,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:fraldinha-extra-grill">
+            <div class="product-media">
+               <img class="product-photo" src="images/products/bovinos/fraldinha-extra-grill.png"
+                 alt="Fraldinha Extra Grill" loading="lazy">
+                 <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Fraldinha Extra Grill</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>59,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:fraldinha-fire">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/fraldinha-fire.png"
+               alt="Fraldinha Fire" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Fraldinha Fire</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>49,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:ancho-grill">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/ancho-grill.png" 
+               alt="Ancho Grill" loading="lazy"> 
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Ancho Grill</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>59,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:contra-file-chef">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/contra-file-chef.png" 
+               alt="Contra File Chef" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Contra File Chef</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>66,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:bananinha">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/bananinha.png" 
+               alt="Bananinha" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Bananinha</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>52,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:capa-file-bassi">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/capa-file-bassi.png" 
+               alt="Capa de Filé Bassi" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Capa de Filé Bassi</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>45,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:maca-de-peito-angus">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/maca-de-peito-angus.png"
+               alt="Maçã de Peito Angus" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Maçã de Peito Angus</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>64,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:rib-steak-grill">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/rib-steak-grill.png"
+               alt="Rib Steak Grill" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Rib Steak Grill</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>69,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:maminha-angus">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/maminha-angus.png"
+               alt="Maminha Angus" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Maminha Angus</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>99,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:alcatra-com-queijo">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/alcatra-com-queijo.png" 
+               alt="Alcatra com Queijo" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Alcatra com Queijo</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>64,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:baby-beef-angus">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/baby-beef-angus.png"
+               alt="Baby Beef Angus" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Baby Beef Angus</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>89,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:chorizo-steak-bdj">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/chorizo-steak-bdj.png"
+               alt="Chorizo Steak bdj 500g" loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Chorizo Steak - BDJ 500g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>39,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:costela-premium">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/costela-bovina-premium.png"
+               alt="Costela Bovina com Queijo - 450g" loading="lazy">
+               <span class="product-tag">Promoção</span> 
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Costela Bovina com Queijo - 450g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>74,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:linguica-costela-angus">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/linguica-costela-angus.png"
+                alt="Linguiça de Costela Angus pct 300g" loading="lazy">
+                <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Linguiça de Costela Angus - 300g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>16,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:linguica-costela-queijo">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/linguica-costela-queijo.png"
+                alt="Linguiça de Costela com Queijo pct 420g" loading="lazy">
+                <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Linguiça de Costela com Queijo - 420g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>25,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:hamburger-angus">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/hamburger-angus.png"
+                alt="Hambúrguer Angus - cx 2 unid" loading="lazy">
+                <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Hambúrguer Angus - cx 2 unid</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>21,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="bovinos:alcatra-queijo-espeto">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/bovinos/alcatra-queijo-espeto.png"
+               alt="Alcatra com Queijo no Espeto - 5 UN." loading="lazy">
+               <span class="product-tag">Promoção</span>
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Alcatra com Queijo no Espeto - 5 UN.</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>34,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUÍNOS -->
+      <div class="category-block" id="cat-suinos">
+        <div class="category-title">
+          <h3>Suínos</h3>
+          <div class="rule"></div>
+          <span class="cat-count">Defumados &amp; temperados</span>
+        </div>
+        <div class="cards-grid" data-category="suinos">
+
+          <div class="product-card" data-key="suinos:picanha-suina-defumada">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/suinos/picanha-suina-defumada.png"
+              alt= "Picanha Suína Defumada" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Picanha Suína Defumada </h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>39,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="suinos:picanha-suina-temperada">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/suinos/picanha-suina-temperada.png" 
+              alt="Picanha Suína Temperada" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Picanha Suína Temperada</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>39,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="suinos:alcatra-suina-temperada">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/suinos/alcatra-suina-temperada.png" 
+               alt="Alcatra Suína Temperada" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Alcatra Suína Temperada</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>34,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="suinos:costelinha-bbq">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/suinos/costelinha-bbq.png" 
+               alt="Costelinha ao Molho BBQ" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Costelinha ao Molho BBQ - 500g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>49,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="suinos:panceta-temperada">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/suinos/panceta-temperada.png"
+               alt="Panceta Temperada" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Panceta Temperada</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>36,90<em>/kg</em></span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="suinos:panceta-bandeja">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/suinos/panceta-bandeja.png" 
+               alt="Panceta Bandeja" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Panceta Bandeja</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>23,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-card" data-key="suinos:linguica-toscana">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/suinos/linguica-toscana.png"
+              alt="Linguiça Toscana" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Linguiça Toscana</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>21,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="suinos:manta-recheada">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/suinos/manta-recheada.png" 
+               alt="Manta Recheada 500g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Manta Recheada - 500g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>21,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="suinos:linguica-artesanal-recheada">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/suinos/linguica-artesanal-recheada.png"
+                alt="Linguiças Artesanais Recheadas 500g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Linguiças Artesanais Recheadas - 500g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>21,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AVES -->
+      <div class="category-block" id="cat-aves">
+        <div class="category-title">
+          <h3>Aves</h3>
+          <div class="rule"></div>
+          <span class="cat-count">Frango &amp; espetos</span>
+        </div>
+        <div class="cards-grid" data-category="aves">
+
+          <div class="product-card" data-key="aves:tulipa-bbq">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/aves/tulipa-bbq.png"
+               alt="Meio da Asa (Tulipa) BBQ 1kg" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Tulipa BBQ - 1kg</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>29,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="aves:tulipa-marinada">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/aves/tulipa-marinada.png"
+                alt="Meio da Asa (Tulipa) Mostarda/Ervas pct 600g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Tulipa Marinada - 600g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>24,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="aves:coxinha-mostarda-mel">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/aves/coxinha-mostarda-mel.png"
+                alt="Coxinha na Mostarda e Mel 1kg" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Coxinha na Mostarda e Mel - 1kg</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>22,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="aves:sobrecoxa-marinada">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/aves/sobrecoxa-cerveja.png"
+                alt="Sobrecoxa Desossada na Cerveja pct 900g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Sobrecoxa Marinada na Cerveja - 900g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>24,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="aves:coracao-espeto">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/aves/coracao-espeto.png" 
+               alt="Coração no Espeto 5 espetos" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Coração no Espeto - 5 un</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>24,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="aves:coracao-temperado">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/aves/coracao-temperado.png"
+               alt="Coração Temperado pct 600g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Coração Temperado - 600g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>29,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="aves:coxinha-temperada">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/aves/coxinha-temperada.png"
+               alt="Coxinha Temperada pct 600g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Coxinha Temperada - 600g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>22,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIVERSOS -->
+      <div class="category-block" id="cat-diversos">
+        <div class="category-title">
+          <h3>Diversos</h3>
+          <div class="rule"></div>
+          <span class="cat-count">Frutos do mar, espetinhos &amp; acessórios</span>
+        </div>
+        <div class="cards-grid" data-category="diversos">
+
+          <div class="product-card" data-key="diversos:pao-de-alho">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/pao-marcas-sabores/pao-de-alho.png"
+               alt="Pão de Alho Zé do Espeto / Beagó / Dona Beth" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Pão de Alho Zé do Espeto / Beagó / Dona Beth</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>22,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-card" data-key="diversos:medalhao-recheado">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/medalhao-recheado.png"
+                alt="Medalhão Recheado" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Medalhão Recheado - 5 UN.</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>34,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-card" data-key="diversos:farofa-crocante-faroka">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/farofa-crocante-faroka.png"
+               alt="Farofa Crocante Faroka Sabores" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Farofa Crocante Faroka Sabores</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>15,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+                   
+          <div class="product-card" data-key="diversos:choripan">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/choripan.png" 
+               alt="Choripan 400g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Choripan - 400g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>29,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:picole-costelinha-queijo">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/picole-costelinha-queijo.png"
+               alt="Picolé de Costelinha com Queijo 3 unid" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Picolé de Costelinha com Queijo 3 unid</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>21,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:camafeu">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/camafeu.png" 
+               alt="Camafeu 10 uni cx" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Camafeu 10 uni cx</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>32,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:camarao-espeto">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/camarao-espeto.png" 
+               alt="Camarão Espeto pct 7 unid" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Camarão Espeto pct 7 unid</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>39,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:bolinho-bacalhau">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/bolinho-bacalhau.png"
+                alt="Bolinho de Bacalhau 15 und 250g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Bolinho de Bacalhau 15 und 250g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>21,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:bolinho-costela">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/bolinho-costela.png"
+                alt="Bolinho de Costela/Copa Lombo com Queijo" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Bolinho de Costela com Queijo</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>42,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:bolinho-copa-lombo">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/bolinho-copa-lombo.png"
+                alt="Bolinho de Costela/Copa Lombo com Queijo" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Bolinho de Copa Lombo com Queijo e Barbecue</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>42,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:salsichao">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/salsichao.png" 
+               alt="Salsichão pct 500g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Salsichão pct 500g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>10,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:queijo-coalho">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/queijo-coalho.png" 
+               alt="Queijo Coalho 5 un." loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Queijo Coalho - 5 un.</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>29,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:acendedor-fogaco">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/acendedor-fogaco.png" 
+               alt="Acendedor Fogaço" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Acendedor Fogaço</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>2,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:sacola-termica">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/sacola-termica.png" 
+               alt="Sacola Térmica" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Sacola Térmica</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>9,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:azeite-alma-lusa">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/azeite-alma-lusa.png"
+               alt="Azeite Extra Virgem Alma Lusa 500ml" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Azeite Extra Virgem Alma Lusa 500ml</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>34,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="diversos:carvao-tamanhos">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/diversos/carvao-tamanhos.png" 
+               alt="Carvão" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Carvão</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>16,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAIS -->
+      <div class="category-block" id="cat-sais">
+        <div class="category-title">
+          <h3>Sais de parrilla</h3>
+          <div class="rule"></div>
+          <span class="cat-count">Temperos de parrilla</span>
+        </div>
+        <div class="cards-grid" data-category="sais">
+
+          <div class="product-card" data-key="sais:sais-parrilla-mini">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/sais/sal-parrilla.png"
+                alt="Sais de Parrilla Mini Sabores 125g/136g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Sal de Parrilla - 125g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>8,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="sais:sais-parrilla-500g">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/sais/sal-parrilla.png"
+                alt="Sais de Parrilla Sabores 500g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Sal de Parrilla - 500g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>16,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="sais:sais-parrilla-850g">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/sais/sal-parrilla.png"
+                alt="Sais de Parrilla Sabores 850g" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Sal de Parrilla - 850g</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>21,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOLHOS -->
+      <div class="category-block" id="cat-molhos">
+        <div class="category-title">
+          <h3>Molhos</h3>
+          <div class="rule"></div>
+          <span class="cat-count">Molhos e temperos líquidos</span>
+        </div>
+        <div class="cards-grid" data-category="molhos">
+
+          <div class="product-card" data-key="molhos:molho-agridoce-ardencia">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/molhos/molho-agridoce-ardencia.png"
+                alt="Molho Agridoce Ardência Exótica" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Molho Agridoce Ardência Exótica</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>18,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="molhos:baconnaise-junior">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/molhos/baconnaise-junior.png" alt="Baconnaise Junior"
+                loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Baconnaise Junior</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>26,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="molhos:maionese-grill-junior">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/molhos/maionese-grill-junior.png" alt="Maionese Grill Junior"
+                loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Maionese Grill Junior</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>22,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="molhos:chimichurri">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/molhos/chimichurri.png" alt="Chimichurri" loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Chimichurri</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>19,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="molhos:vinagrete-pimenta">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/molhos/vinagrete-pimenta.png" alt="Vinagrete de Pimenta"
+                loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Vinagrete de Pimenta</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>32,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-key="molhos:melado-de-cana">
+            <div class="product-media">
+              <img class="product-photo" src="images/products/molhos/melado-de-cana.png" alt="Melado de Cana 500ml"
+                loading="lazy">
+            </div>
+            <div class="product-body">
+              <h4 class="product-name">Melado de Cana 500ml</h4>
+              <div class="product-footer">
+                <span class="product-price"><small>R$</small>19,90</span>
+                <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar ao carrinho">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none" />
+                    <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KITS -->
+      <div class="category-block" id="cat-kits">
+        <div class="category-title">
+          <h3>Kits para Churrasco</h3>
+          <div class="rule"></div>
+          <span class="cat-count">Prontos pra chamada</span>
+        </div>
+        <div class="kits-grid">
+          
+          <div class="kit-card">
+            <div class="kit-card-media"><img data-kit-slug="kit-contatinhos"
+              alt="Kit Contatinhos" loading="lazy"><span
+                class="product-flame" aria-hidden="true">🔥</span></div>
+            <span class="kit-people">5 pessoas</span>
+            <h4>KIT CONTATINHOS</h4>
+            <span class="kit-price"><small>R$</small>149,90</span>
+            <ul>
+              <li>1 picanha bdj Seleção Contato</li>
+              <li>1 panceta temperada Contato</li>
+              <li>1 coxinha no chimichurri Contato</li>
+              <li>1 linguiça de costela Angus</li>
+              <li>1 faroka de bacon</li>
+              <li>1 pão de alho gourmet trad. 300g</li>
+            </ul>
+            <button type="button" class="kit-cta kit-add-btn">Adicionar ao carrinho</button>
+          </div>
+
+          <div class="kit-card">
+            <div class="kit-card-media"><img data-kit-slug="kit-completao" 
+              alt="Kit Completão" loading="lazy"><span
+                class="product-flame" aria-hidden="true">🔥</span></div>
+            <span class="kit-people">10 pessoas</span>
+            <h4>KIT COMPLETÃO</h4>
+            <span class="kit-price"><small>R$</small>249,90</span>
+            <ul>
+              <li>1 picanha padrão A</li>
+              <li>1 tulipa ao BBQ</li>
+              <li>1 alcatra suína temperada</li>
+              <li>1 linguiça artesanal</li>
+              <li>1 pão de alho gourmet</li>
+            </ul>
+            <button type="button" class="kit-cta kit-add-btn">Adicionar ao carrinho</button>
+          </div>
+
+          <div class="kit-card">
+            <div class="kit-card-media"><img data-kit-slug="kit-resenha" 
+              alt="Kit Resenha" loading="lazy"><span
+                class="product-flame" aria-hidden="true">🔥</span></div>
+            <span class="kit-people">12 pessoas</span>
+            <h4>KIT RESENHA</h4>
+            <span class="kit-price"><small>R$</small>269,90</span>
+            <ul>
+              <li>1 picanha padrão A</li>
+              <li>1 panceta temperada</li>
+              <li>1 medalhão</li>
+              <li>1 sobrecoxa desossada na cerveja</li>
+              <li>1 salsichão</li>
+              <li>1 linguiça artesanal</li>
+            </ul>
+            <button type="button" class="kit-cta kit-add-btn">Adicionar ao carrinho</button>
+          </div>
+
+          <div class="kit-card">
+            <div class="kit-card-media"><img data-kit-slug="kit-contato" 
+              alt="Kit Contato" loading="lazy"><span
+                class="product-flame" aria-hidden="true">🔥</span></div>
+            <span class="kit-people">15 pessoas</span>
+            <h4>KIT CONTATO</h4>
+            <span class="kit-price"><small>R$</small>329,90</span>
+            <ul>
+              <li>1 picanha padrão A</li>
+              <li>1 bananinha</li>
+              <li>1 panceta temperada</li>
+              <li>1 linguiça toscana</li>
+              <li>1 sobrecoxa desossada na cerveja</li>
+              <li>1 medalhão</li>
+              <li>1 pão de alho gourmet</li>
+            </ul>
+            <button type="button" class="kit-cta kit-add-btn">Adicionar ao carrinho</button>
+          </div>
+
+          <div class="kit-card">
+            <div class="kit-card-media"><img data-kit-slug="kit-galera" 
+              alt="Kit Galera" loading="lazy"><span
+                class="product-flame" aria-hidden="true">🔥</span></div>
+            <span class="kit-people">20 pessoas</span>
+            <h4>KIT GALERA</h4>
+            <span class="kit-price"><small>R$</small>479,90</span>
+            <ul>
+              <li>2 picanhas padrão A</li>
+              <li>1 picanha suína defumada</li>
+              <li>1 panceta temperada</li>
+              <li>1 tulipa ao BBQ</li>
+              <li>1 sobrecoxa desossada na cerveja</li>
+              <li>1 queijo coalho</li>
+              <li>1 coração espeto</li>
+              <li>1 linguiça artesanal</li>
+              <li>1 salsichão</li>
+              <li>1 pão de alho gourmet</li>
+            </ul>
+            <button type="button" class="kit-cta kit-add-btn">Adicionar ao carrinho</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="popular" class="reveal">
+    <div class="hours-block">
+      <div>
+        <span class="eyebrow">Funcionamento</span>
+        <h2 class="hours-title">Horários</h2>
+        <div class="hours-list" id="hoursList">
+          <div class="row" data-day="1"><span>Segunda</span><span>Fechado</span></div>
+          <div class="row" data-day="2"><span>Terça</span><span>9h – 19h</span></div>
+          <div class="row" data-day="3"><span>Quarta</span><span>9h – 19h</span></div>
+          <div class="row" data-day="4"><span>Quinta</span><span>9h – 19h</span></div>
+          <div class="row" data-day="5"><span>Sexta</span><span>9h – 19h</span></div>
+          <div class="row" data-day="6"><span>Sábado</span><span>9h – 19h</span></div>
+          <div class="row" data-day="0"><span>Domingo</span><span>10h30 – 13h</span></div>
+        </div>
+        <p class="hours-note">Feriados: 10h30 às 13h.</p>
+      </div>
+      <div class="chart-wrap">
+        <span class="eyebrow">Horários de pico </span>
+        <canvas id="popular-canvas" width="600" height="180"></canvas>
+        <div class="chart-labels">
+          <span>6h</span><span>9h</span><span>12h</span><span>15h</span><span>18h</span><span>21h</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="avaliacoes" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">O que dizem os clientes</span>
+      <h2>Avaliações</h2>
+    </div>
+
+    <div class="review-summary">
+      <div>
+        <div class="big-score">5.0</div>
+        <span class="stars">★★★★★</span>
+        <span class="count">89 avaliações no Google</span>
+      </div>
+      <div>
+        <div class="bar-row"><span class="lbl">5</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:96%"></div>
+          </div>
+        </div>
+        <div class="bar-row"><span class="lbl">4</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:4%"></div>
+          </div>
+        </div>
+        <div class="bar-row"><span class="lbl">3</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="bar-row"><span class="lbl">2</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="bar-row"><span class="lbl">1</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-cards">
+      <div class="review-card">
+        <span class="stars">★★★★★</span>
+        <p>Carne de primeira qualidade e atendimento excelente. O Garcez sempre indica o corte certo pra ocasião.</p>
+        <span class="who">Cliente Google</span>
+      </div>
+      <div class="review-card">
+        <span class="stars">★★★★★</span>
+        <p>Melhor picanha da região, sem dúvida. Preço justo e entrega rápida no bairro todo.</p>
+        <span class="who">Cliente Google</span>
+      </div>
+      <div class="review-card">
+        <span class="stars">★★★★★</span>
+        <p>Já virou parada obrigatória antes de todo churrasco de fim de semana. Recomendo demais.</p>
+        <span class="who">Cliente Google</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">Fale com a gente</span>
+      <h2>Contato &amp; Localização</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-line">
+          <span class="ic">📍</span>
+          <div>
+            <span class="lbl">Endereço</span>
+            <span class="val">R. Rio Tocantins, 551 - Riacho das Pedras, Contagem - MG, 32280-170</span>
+          </div>
+        </div>
+
+        <div class="contact-line">
+          <span class="ic">📞</span>
+          <div>
+            <span class="lbl">Telefone / WhatsApp</span>
+            <a class="val" href="https://api.whatsapp.com/send?phone=5531992657190" target="_blank" rel="noopener">(31)
+              99265-7190</a>
+          </div>
+        </div>
+
+        <div class="contact-line">
+          <span class="ic">📷</span>
+          <div>
+            <span class="lbl">Instagram</span>
+            <a class="val" href="https://instagram.com" target="_blank"
+              rel="noopener">instagram.com/contatodapicanha</a>
+          </div>
+        </div>
+
+        <div class="contact-line">
+          <span class="ic">🕒</span>
+          <div>
+            <span class="lbl">Hoje</span>
+            <span class="val warn" id="todayStatus">Fechado</span>
+          </div>
+        </div>
+
+        <div class="contact-line">
+          <span class="ic">⭐</span>
+          <div>
+            <span class="lbl">Avaliação</span>
+            <span class="val">5.0 ★★★★★ · 91 avaliações no Google</span>
+          </div>
+        </div>
+
+      <div class="map-embed">
+        <span class="pin-label">📍 Contato da Picanha</span>
+        <iframe
+          src="https://www.google.com/maps?q=R.+Rio+Tocantins,+551+-+Riacho+das+Pedras,+Contagem+-+MG,+32280-170&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo"><span class="flame"> </span>Contato <span>da Picanha</span></div>
+    <div class="foot-links">
+      <a href="#menu">Menu</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="copy">© 2026 Contato da Picanha. R. Rio Tocantins, 551, Contagem - MG.</div>
+    <a class="admin-link" href="admin.html">Área do administrador</a>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

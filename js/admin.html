@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Área do administrador | Contato da Picanha</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<div class="grain"></div>
+
+<header class="admin-header">
+  <div class="logo"><span class="flame">🔥</span> Contato <span>da Picanha</span></div>
+  <div class="admin-header-right">
+    <a href="index.html" class="admin-back-link">← Voltar para o site</a>
+    <button type="button" id="adminLogoutBtn" class="btn btn-outline admin-logout-btn" hidden>Sair</button>
+  </div>
+</header>
+
+<main class="admin-main">
+
+  <!-- AVISO IMPORTANTE SOBRE O FUNCIONAMENTO SEM SERVIDOR -->
+  <div class="admin-notice">
+    <strong>Como isso funciona:</strong> este site não tem servidor/banco de dados, então tudo
+    que você editar aqui fica salvo só <em>neste navegador</em>. Para as mudanças aparecerem
+    para todo mundo que visita o site, use o botão <strong>"Baixar catálogo atualizado"</strong>
+    no fim da página e peça para quem cuida da hospedagem substituir o arquivo
+    <code>js/products-data.js</code> pelo que foi baixado.
+  </div>
+
+  <div class="admin-notice">
+    <strong>Produtos vendidos por peso:</strong> se a unidade de um produto for
+    <code>kg</code>, o carrinho e a mensagem do WhatsApp tratam ele como "a pesar" —
+    o cliente vê o preço por quilo, mas o valor final e o total do pedido só são
+    fechados por vocês depois da pesagem na loja. Qualquer outra unidade (ou nenhuma)
+    é somada normalmente no total.
+  </div>
+
+  <!-- CRIAR CONTA (só aparece se ainda não existir nenhuma) -->
+  <section id="setupSection" class="admin-card" hidden>
+    <h2>Criar conta de administrador</h2>
+    <p class="admin-sub">Esta é a primeira vez que o painel é acessado neste navegador. Crie o usuário e a senha do administrador.</p>
+    <form id="setupForm">
+      <label>Usuário
+        <input type="text" id="setupUser" required autocomplete="username">
+      </label>
+      <label>Senha (mínimo 6 caracteres)
+        <input type="password" id="setupPass" required minlength="6" autocomplete="new-password">
+      </label>
+      <label>Confirmar senha
+        <input type="password" id="setupPass2" required minlength="6" autocomplete="new-password">
+      </label>
+      <p class="admin-error" id="setupError"></p>
+      <button type="submit" class="btn btn-primary">Criar conta</button>
+    </form>
+    <p class="admin-warning">⚠️ Como o login é feito só pelo navegador (sem servidor), qualquer pessoa com
+      acesso técnico a este computador pode contornar essa senha. Não é uma segurança de nível bancário —
+      é um controle de acesso simples para afastar curiosos.</p>
+  </section>
+
+  <!-- LOGIN -->
+  <section id="loginSection" class="admin-card" hidden>
+    <h2>Entrar no painel</h2>
+    <form id="loginForm">
+      <label>Usuário
+        <input type="text" id="loginUser" required autocomplete="username">
+      </label>
+      <label>Senha
+        <input type="password" id="loginPass" required autocomplete="current-password">
+      </label>
+      <p class="admin-error" id="loginError"></p>
+      <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+  </section>
+
+  <!-- PAINEL (depois de logado) -->
+  <section id="panelSection" hidden>
+
+    <div class="admin-card">
+      <h2>Trocar senha</h2>
+      <form id="changePassForm" class="admin-inline-form">
+        <input type="password" id="curPass" placeholder="Senha atual" required autocomplete="current-password">
+        <input type="password" id="newPass" placeholder="Nova senha" required minlength="6" autocomplete="new-password">
+        <button type="submit" class="btn btn-outline">Salvar nova senha</button>
+      </form>
+      <p class="admin-error" id="changePassError"></p>
+      <p class="admin-ok" id="changePassOk"></p>
+    </div>
+
+    <div id="categoriesWrap"><!-- categorias renderizadas via JS --></div>
+
+    <div class="admin-card">
+      <h2>Kits para churrasco</h2>
+      <p class="admin-sub">Edite nome, preço e a foto de cada kit (o kit continua com a mesma lista de itens).</p>
+      <div id="kitsEditWrap"></div>
+    </div>
+
+    <div class="admin-card admin-export-card">
+      <h2>Publicar as alterações</h2>
+      <p class="admin-sub">
+        Baixe o catálogo atualizado e envie para quem hospeda o site substituir o arquivo
+        <code>js/products-data.js</code>. Só assim as mudanças aparecem para todos os visitantes.
+      </p>
+      <button type="button" id="exportBtn" class="btn btn-primary">⬇ Baixar catálogo atualizado</button>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="js/products-data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

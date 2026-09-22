@@ -1,0 +1,64 @@
+<!--
+  CONTATO DA PICANHA — Card de produto (referência)
+  ===================================================
+  Este HTML é o mesmo usado em CADA card de produto dentro do
+  index.html (um por produto, dentro de cada categoria). Os cards
+  continuam sendo HTML estático — não são gerados do zero por
+  JavaScript.
+
+  O que o js/script.js faz por cima desse HTML estático, ao
+  carregar a página:
+  - Lê o atributo "data-key" do card (formato "categoria:slug")
+    e busca o produto já mesclado com as edições do admin
+    (Store.getMergedProduct) para atualizar foto/nome/preço/selo
+    diretamente nos elementos existentes.
+  - Se o admin marcou o produto como removido, o card inteiro é
+    apagado da página.
+  - Produtos criados do zero pelo admin (que não existem aqui no
+    HTML original) são adicionados ao final da categoria certa,
+    seguindo este mesmo padrão de card.
+
+  O botão de carrinho (".add-cart-btn") não precisa de atributos
+  data-name/data-price — o clique lê o nome e o preço direto do
+  texto que já está no card (".product-name" e ".product-price"),
+  então funciona tanto para os cards originais quanto para os que
+  o admin adicionar depois.
+
+  IMPORTANTE — produto vendido por peso: quando a unidade do
+  produto é "kg" (como no exemplo abaixo), o carrinho e a mensagem
+  do WhatsApp tratam esse item como "a pesar" e não entram no
+  total automático — veja o README.md, seção "Produtos vendidos
+  por peso".
+
+  IMPORTANTE — produto esgotado: quando o admin marca "Esgotado"
+  no painel, o script.js adiciona a classe "is-sold-out" no card,
+  troca o texto do ".product-tag" para "Esgotado" (com a classe
+  "product-tag-soldout") e desativa o ".add-cart-btn" (atributo
+  disabled) — o card fica assim mesmo sem editar nada aqui.
+
+  Para mudar produtos (nome, preço, unidade, foto, selo de
+  promoção, esgotado), remover ou adicionar produtos: use o
+  painel em admin.html — não precisa editar nada aqui à mão.
+-->
+
+<div class="product-card" data-key="picanhas:frigol">
+  <div class="product-media">
+    <img class="product-photo" src="images/products/frigol.png" alt="Frigol" loading="lazy">
+    <span class="product-flame" aria-hidden="true">🔥</span>
+    <span class="product-tag">Promoção</span>
+  </div>
+  <div class="product-body">
+    <h4 class="product-name">Frigol</h4>
+    <p class="product-meta">Nacional · Resfriada</p>
+    <div class="product-footer">
+      <span class="product-price"><small>R$</small>89,90<em>/kg</em></span>
+      <button type="button" class="product-cta add-cart-btn" aria-label="Adicionar Frigol ao carrinho">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+          <circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+          <path d="M2.5 3h2.4l2.4 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
