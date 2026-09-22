@@ -1,0 +1,19 @@
+Banner da página inicial (topo do site)
+========================================
+
+O banner logo no topo do site é feito de 4 fotos lado a lado.
+Salve as fotos exatamente com estes nomes, nesta mesma pasta:
+
+  banner-1.jpg
+  banner-2.jpg
+  banner-3.jpg
+  banner-4.jpg
+
+Se algum arquivo não existir, aquele espaço mostra um ícone de
+brasa 🔥 no lugar — o site não quebra, só fica sem a foto até
+você adicionar.
+
+Dica: fotos na horizontal (paisagem), todas com proporção
+parecida, ficam mais uniformes no banner. Pode ser .jpg ou .png
+(nesse caso, troque a extensão no index.html também, ex:
+banner-1.png).
