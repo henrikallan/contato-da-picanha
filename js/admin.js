@@ -12,8 +12,9 @@ const CATEGORY_LABELS = {
   suinos: "Suínos",
   aves: "Aves",
   diversos: "Diversos",
-  sais: "Sais",
   molhos: "Molhos",
+  sais: "Sais",
+  acessorios: "Acessórios",
   kits: "Kits",
 };
 
@@ -145,7 +146,7 @@ function categoryEditorHTML(category) {
         <input type="text" name="unit" placeholder="Unidade — kg vende por peso, opcional">
         ${isPicanhas ? `<input type="text" name="meta" placeholder="Ex: Nacional · Resfriada — opcional">` : ""}
         <input type="text" name="tag" placeholder="Selo (ex: Promoção) — opcional">
-        <input type="text" name="image" placeholder="Caminho da 1ª imagem (ex: images/products/novo.png) — opcional">
+        <input type="text" name="image" placeholder="Caminho da 1ª imagem (ex: images/products/novo.jpg) — opcional">
         <input type="number" name="imageZoom" placeholder="Zoom da 1ª foto % (padrão 100)" min="100" max="250" step="5">
         <input type="text" name="image2" placeholder="Caminho da 2ª imagem — opcional">
         <input type="number" name="image2Zoom" placeholder="Zoom da 2ª foto % (padrão 100)" min="100" max="250" step="5">
@@ -167,7 +168,7 @@ function productRowHTML(category, p, isPicanhas) {
       <label>Unidade <input type="text" class="f-unit" value="${escapeAttr(p.unit || "")}" placeholder="kg vende por peso"></label>
       ${isPicanhas ? `<label>Info extra <input type="text" class="f-meta" value="${escapeAttr(p.meta || [p.origin, p.storage].filter(Boolean).join(" · "))}"></label>` : ""}
       <label>Selo <input type="text" class="f-tag" value="${escapeAttr(p.tag || "")}" placeholder="Promoção"></label>
-      <label>Imagem 1 <input type="text" class="f-image" value="${escapeAttr(p.image || ("images/products/" + p.slug + ".png"))}"></label>
+      <label>Imagem 1 <input type="text" class="f-image" value="${escapeAttr(p.image || ("images/products/" + p.slug + ".jpg"))}"></label>
       <label>Zoom foto 1 (%) <input type="number" class="f-image-zoom" value="${escapeAttr(p.imageZoom || 100)}" min="100" max="250" step="5"></label>
       <label>Imagem 2 <input type="text" class="f-image2" value="${escapeAttr(p.image2 || "")}" placeholder="opcional, mostrada ao clicar"></label>
       <label>Zoom foto 2 (%) <input type="number" class="f-image2-zoom" value="${escapeAttr(p.image2Zoom || 100)}" min="100" max="250" step="5"></label>
@@ -282,7 +283,7 @@ function renderKitsEditor() {
       <div class="admin-product-fields">
         <label>Nome do kit <input type="text" class="f-kit-name" value="${escapeAttr(ov.name || "")}" placeholder="(mantém o atual se vazio)"></label>
         <label>Preço <input type="text" class="f-kit-price" value="${escapeAttr(ov.price || "")}" placeholder="Ex: 149,90"></label>
-        <label>Imagem <input type="text" class="f-kit-image" value="${escapeAttr(ov.image || ("images/kits/" + slug + ".png"))}"></label>
+        <label>Imagem <input type="text" class="f-kit-image" value="${escapeAttr(ov.image || ("images/kits/" + slug + ".jpg"))}"></label>
       </div>
       <div class="admin-product-actions">
         <button type="button" class="btn btn-outline btn-small admin-kit-save-btn">Salvar</button>

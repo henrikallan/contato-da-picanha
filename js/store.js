@@ -130,7 +130,7 @@ const Store = (() => {
 
   function getProductImage(p) {
     if (p.image) return p.image;
-    return "images/products/" + p.slug + ".png";
+    return "images/products/" + p.slug + ".jpg";
   }
 
   // Edita/insere override de um produto que já existe em products-data.js

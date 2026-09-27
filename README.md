@@ -16,8 +16,8 @@ js/script.js                   → renderiza os cards a partir do Store, menu mo
 js/admin.js                  → lógica do painel: criar conta, login, editar catálogo, exportar
 partials/product-card.html    → cópia de referência do HTML gerado para cada card (só leitura)
 images/banner/banner-1.jpg…4  → as 4 fotos do banner do topo (você adiciona)
-images/products/<slug>.png    → foto de cada produto (opcional)
-images/kits/<kit-slug>.png    → foto de cada kit (opcional)
+images/products/<slug>.jpg    → foto de cada produto (opcional)
+images/kits/<kit-slug>.jpg    → foto de cada kit (opcional)
 ```
 
 ## ⚠️ Leia isto primeiro: como funciona sem servidor
@@ -163,13 +163,13 @@ serem exportadas (veja a seção "como funciona sem servidor" acima).
 ### Como adicionar fotos dos produtos
 
 Cada produto tem um campo `slug` (ex.: `frigol`, `chorizo-estancia-92`,
-`carvao-5kg`). Por padrão, a foto é buscada em `images/products/<slug>.png`.
+`carvao-5kg`). Por padrão, a foto é buscada em `images/products/<slug>.jpg`.
 Se o arquivo não existir, o card mostra automaticamente um ícone de brasa 🔥
 no lugar — o site não quebra e não aparece ícone de imagem quebrada. No
 painel do admin também dá pra colocar qualquer outro caminho/URL de imagem no
 campo "Imagem" de cada produto.
 
-O mesmo vale para os kits, em `images/kits/<kit-slug>.png`
+O mesmo vale para os kits, em `images/kits/<kit-slug>.jpg`
 (`kit-contatinhos`, `kit-completao`, `kit-resenha`, `kit-contato`,
 `kit-galera`), também editável pelo painel.
 

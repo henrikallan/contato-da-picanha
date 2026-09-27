@@ -41,6 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupCart();
   highlightCurrentDay();
   updateTodayStatus();
+  setupCatNavAutoHide();
+  equalizeCatNavWidth();
 });
 
 /* ----------------------------------------------------------
@@ -148,7 +150,7 @@ function appendCustomProducts() {
 }
 
 function customProductCardHTML(category, p) {
-  const image = p.image || ("images/products/" + p.slug + ".png");
+  const image = p.image || ("images/products/" + p.slug + ".jpg");
   const meta = p.meta || "";
   const unit = p.unit ? `<em>/${escapeHTML(p.unit)}</em>` : "";
   const soldOut = !!p.soldOut;
@@ -187,7 +189,7 @@ function applyKitOverrides() {
     if (!card) return;
     const ov = overrides[slug];
     if (ov.name) card.querySelector("h4").textContent = ov.name;
-    if (ov.price) card.querySelector(".kit-price").textContent = "R$" + ov.price;
+        if (ov.price) card.querySelector(".kit-price").innerHTML = "<small>R$</small>" + ov.price;
   });
 }
 
@@ -213,7 +215,7 @@ function setupImageFallback() {
 }
 
 /* ----------------------------------------------------------
-   5) IMAGENS DOS KITS (images/kits/<kit-slug>.png + overrides)
+   5) IMAGENS DOS KITS (images/kits/<kit-slug>.jpg + overrides)
 ---------------------------------------------------------- */
 function renderKitImages() {
   if (!window.KIT_IMAGES) return;
@@ -920,6 +922,68 @@ function setupScrollReveal() {
   targets.forEach((t) => observer.observe(t));
 }
 
+function setupCatNavAutoHide() {
+  const nav = document.querySelector(".cat-nav");
+  if (!nav) return;
+
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  function update() {
+    const y = window.scrollY;
+    const delta = y - lastY;
+    // Checa a posição REAL a cada rolagem, em vez de confiar num número
+    // calculado uma vez só — assim nunca fica desatualizado.
+    const isStuck = nav.getBoundingClientRect().top <= 75;
+
+    if (isStuck) {
+      if (delta > 8) {
+        nav.classList.add("cat-nav-hidden");
+      } else if (delta < -8) {
+        nav.classList.remove("cat-nav-hidden");
+      }
+    } else {
+      nav.classList.remove("cat-nav-hidden");
+    }
+    lastY = y;
+    ticking = false;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+}
+
+// Deixa todos os botões do menu de categorias com a mesma largura,
+// sempre igual à do texto mais comprido (ex.: "ACESSÓRIOS").
+function equalizeCatNavWidth() {
+  const links = document.querySelectorAll(".cat-nav a");
+  if (!links.length) return;
+
+  function run() {
+    links.forEach((a) => { a.style.minWidth = ""; });
+    let max = 0;
+    links.forEach((a) => { max = Math.max(max, a.getBoundingClientRect().width); });
+    links.forEach((a) => { a.style.minWidth = max + "px"; });
+  }
+
+  // Espera a fonte (Barlow Condensed) carregar antes de medir, senão a
+  // medida sai errada e o texto some da fonte real depois.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(run);
+  } else {
+    run();
+  }
+  window.addEventListener("resize", run);
+}
+
 /* ----------------------------------------------------------
    12) GRÁFICO DE HORÁRIO DE PICO (canvas simples, sem libs)
 ---------------------------------------------------------- */
@@ -1117,10 +1181,10 @@ function refreshCartUI() {
 
     if (hasWeighted) {
     totalLabelEl.textContent = fixedTotal > 0 ? "Subtotal (itens com preço fechado)" : "Total";
-    totalEl.textContent = fixedTotal > 0 ? "R$" + Store.formatBRL(fixedTotal) : "a definir";
+    totalEl.innerHTML = fixedTotal > 0 ? "<small>R$</small>" + Store.formatBRL(fixedTotal) : "a definir";
   } else {
     totalLabelEl.textContent = "Total";
-    totalEl.textContent = "R$" + Store.formatBRL(fixedTotal);
+    totalEl.innerHTML = "<small>R$</small>" + Store.formatBRL(fixedTotal);
   }
 }
 
@@ -1135,9 +1199,9 @@ function cartItemHTML(item) {
       ${weighted ? `<span class="cart-item-note">Será pesado na loja</span>` : ""}
     </div>
     <div class="cart-item-qty">
-      <button type="button" class="qty-btn qty-minus" aria-label="Diminuir quantidade">−</button>
+      <button type="button" class="qty-btn qty-minus" aria-label="Diminuir quantidade"><svg viewBox="0 0 12 12" aria-hidden="true"><line x1="2" y1="6" x2="10" y2="6"/></svg></button>
       <span class="qty-value">${item.qty}</span>
-      <button type="button" class="qty-btn qty-plus" aria-label="Aumentar quantidade">+</button>
+      <button type="button" class="qty-btn qty-plus" aria-label="Aumentar quantidade"><svg viewBox="0 0 12 12" aria-hidden="true"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg></button>
     </div>
     <button type="button" class="cart-item-remove" aria-label="Remover item">×</button>
   </div>`;
