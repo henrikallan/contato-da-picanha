@@ -1016,29 +1016,29 @@ function drawPopularChart() {
   }));
 
   const grad = ctx.createLinearGradient(0, 0, 0, h);
-  grad.addColorStop(0, "rgba(255,106,44,0.45)");
-  grad.addColorStop(1, "rgba(255,106,44,0.02)");
+  grad.addColorStop(0, "rgba(212,17,17,0.45)");
+  grad.addColorStop(1, "rgba(212,17,17,0.02)");
 
-  ctx.beginPath();
-  ctx.moveTo(points[0].x, h - pad);
+   ctx.beginPath();
+   ctx.moveTo(points[0].x, h - pad);
   points.forEach((p) => ctx.lineTo(p.x, p.y));
-  ctx.lineTo(points[points.length - 1].x, h - pad);
-  ctx.closePath();
-  ctx.fillStyle = grad;
-  ctx.fill();
+   ctx.lineTo(points[points.length - 1].x, h - pad);
+   ctx.closePath();
+   ctx.fillStyle = grad;
+   ctx.fill();
 
-  ctx.beginPath();
+   ctx.beginPath();
   points.forEach((p, i) => (i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)));
-  ctx.strokeStyle = "#ff9752";
-  ctx.lineWidth = 2.5;
-  ctx.lineJoin = "round";
-  ctx.stroke();
+   ctx.strokeStyle = "#ef3939";
+   ctx.lineWidth = 2.5;
+   ctx.lineJoin = "round";
+   ctx.stroke();
 
   const peakIndex = values.indexOf(max);
-  ctx.beginPath();
-  ctx.arc(points[peakIndex].x, points[peakIndex].y, 4.5, 0, Math.PI * 2);
-  ctx.fillStyle = "#e8b34d";
-  ctx.fill();
+   ctx.beginPath();
+   ctx.arc(points[peakIndex].x, points[peakIndex].y, 4.5, 0, Math.PI * 2);
+    ctx.fillStyle = "#f86807";
+   ctx.fill();
 }
 
 let _chartResizeTimer = null;

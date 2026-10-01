@@ -121,6 +121,7 @@ header{
   min-width: 0;
 }
 
+
 .logo span:not(.flame){ color: var(--text); }
 
 nav ul{ display:flex; gap: 2rem; }
@@ -1526,6 +1527,10 @@ footer{
   width: 100%;
   font: inherit;
   color: inherit;
+}
+
+.search-result-item.is-sold-out .search-result-price{
+  color: var(--ember-2);
 }
 .search-result-item:hover{ background: var(--panel-2); border-color: var(--line); }
 .search-result-photo{
