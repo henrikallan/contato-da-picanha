@@ -25,6 +25,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   applyProductOverrides();
   appendCustomProducts();
+  organizeSoldOutProducts();
   applyKitOverrides();
   setupImageFallback();
   renderKitImages();
@@ -145,6 +146,19 @@ function appendCustomProducts() {
     const customProducts = Store.getCustomProductsForCategory(category);
     customProducts.forEach((p) => {
       grid.insertAdjacentHTML("beforeend", customProductCardHTML(category, p));
+    });
+  });
+}
+
+function organizeSoldOutProducts() {
+  document.querySelectorAll(".cards-grid[data-category]").forEach((grid) => {
+    const cards = Array.from(grid.querySelectorAll(".product-card"));
+
+    const available = cards.filter(card => !card.classList.contains("is-sold-out"));
+    const soldOut = cards.filter(card => card.classList.contains("is-sold-out"));
+
+    [...available, ...soldOut].forEach(card => {
+      grid.appendChild(card);
     });
   });
 }
