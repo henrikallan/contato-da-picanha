@@ -20,13 +20,13 @@ const PRODUCTS = {
 
   picanhas: [
     { slug: "frigol",             name: "PICANHA FRIGOL",                       origin: "Nacional",   storage: "Resfriada", price: "89,90",  unit: "kg",   soldOut: true },
-    { slug: "pul",                name: "PICANHA PUL",                          origin: "Nacional",   storage: "Resfriada", price: "112,90", unit: "kg" },
-    { slug: "chef",               name: "PICANHA CHEF",                         origin: "Nacional",   storage: "Resfriada", price: "109,90", unit: "kg" },
-    { slug: "estancia-92",        name: "PICANHA ESTÂNCIA 92",                  origin: "Nacional",   storage: "Resfriada", price: "139,90", unit: "kg" },
+    { slug: "pul",                name: "PICANHA PUL",                          origin: "Nacional",   storage: "Resfriada", price: "112,90", oldPrice: "122,90", unit: "kg", tag: "Promoção" },
+    { slug: "chef",               name: "PICANHA CHEF",                         origin: "Nacional",   storage: "Resfriada", price: "115,90", unit: "kg" },
+    { slug: "estancia-92",        name: "PICANHA ESTÂNCIA 92",                  origin: "Nacional",   storage: "Resfriada", price: "144,90", unit: "kg" },
     { slug: "bassi",              name: "PICANHA BASSI",                        origin: "Nacional",   storage: "Resfriada", price: "144,90", unit: "kg",   soldOut: true },
-    { slug: "brasa",              name: "PICANHA BRASA",                        origin: "Nacional",   storage: "Resfriada", price: "114,90", unit: "kg" },
+    { slug: "brasa",              name: "PICANHA BRASA",                        origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg" },
     { slug: "dimeza",             name: "PICANHA DIMEZA",                       origin: "Nacional",   storage: "Resfriada", price: "117,90", unit: "kg",   soldOut: true },
-    { slug: "fire",               name: "PICANHA FIRE",                         origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg" },
+    { slug: "fire",               name: "PICANHA FIRE",                         origin: "Nacional",   storage: "Resfriada", price: "122,90", unit: "kg" },
     { slug: "baby-novilho",       name: "PICANHA BABY NOVILHO",                 origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg",   soldOut: true },
     { slug: "diprima",            name: "PICANHA DIPRIMA",                      origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg",   soldOut: true },
     { slug: "guarani",            name: "PICANHA GUARANI",                      origin: "Paraguaia",  storage: "Resfriada", price: "127,90", unit: "kg",   soldOut: true },
@@ -41,11 +41,11 @@ const PRODUCTS = {
     { slug: "chorizo-estancia-92",    name: "CHORIZO ESTÂNCIA 92",                      price: "79,90", unit: "kg" },
     { slug: "fraldinha-extra-grill",  name: "FRALDINHA EXTRA GRILL",                    price: "59,90", unit: "kg" },
     { slug: "fraldinha-fire",         name: "FRALDINHA FIRE",                           price: "49,90", unit: "kg",   soldOut: true }, 
-    { slug: "ancho-grill",            name: "ANCHO GRILL",                              price: "59,90", unit: "kg" },
+    { slug: "ancho-grill",            name: "ANCHO GRILL",                              price: "64,90", unit: "kg" },
     { slug: "contra-file-cara-branca",name: "CONTRA FILÉ CARA BRANCA",                  price: "69,90", unit: "kg" },
     { slug: "contra-file-chef",       name: "CONTRA FILÉ CHEF",                         price: "66,90", unit: "kg",   soldOut: true },
     { slug: "bananinha",              name: "BANANINHA",                                price: "55,90", unit: "kg" },
-    { slug: "capa-file-bassi",        name: "CAPA DE FILÉ BASSI",                       price: "45,90", unit: "kg" },
+    { slug: "capa-file-bassi",        name: "CAPA DE FILÉ BASSI",                       price: "45,90", unit: "kg",   soldOut: true },
     { slug: "stick-de-costela",       name: "STICK DE COSTELA",                         price: "59,90", unit: "kg" },
     { slug: "maca-de-peito-angus",    name: "BRISKET ANGUS - MAÇÃ DE PEITO",            price: "64,90", unit: "kg" },
     { slug: "rib-steak-grill",        name: "RIB STEAK GRILL",                          price: "69,90", unit: "kg" },
@@ -199,7 +199,7 @@ const PRODUCTS = {
       ] } ] } },
 
     { slug: "baconnaise-junior",     name: "BACONNAISE JUNIOR - 360g",             price: "26,90" },
-    { slug: "maionese-grill-junior", name: "MAIONESE GRILL JUNIOR - 350g",         price: "22,90" },
+    { slug: "maionese-grill-junior", name: "MAIONESE GRILL JUNIOR - 350g",         price: "25,90" },
 
     { slug: "chimichurri",           name: "CHIMICHURRI",                   price: "19,90",
        variants: { brands: [ { flavors: [

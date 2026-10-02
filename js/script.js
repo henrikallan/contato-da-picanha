@@ -100,9 +100,13 @@ function fillProductCard(card, p) {
   const meta = p.meta || (p.origin || p.storage ? [p.origin, p.storage].filter(Boolean).join(" · ") : "");
   if (metaEl) metaEl.textContent = meta;
 
-   if (priceEl && p.price) {
+  const oldPriceEl = card.querySelector(".product-price-old");
+if (oldPriceEl) {
+    oldPriceEl.textContent = p.oldPrice ? `R$ ${p.oldPrice}` : "";
+}
+if (priceEl && p.price) {
     renderPrice(priceEl, p.price, p.unit);
-  }
+}
 
   applyStockState(card, tagEl, addBtn, p);
 }
@@ -119,10 +123,15 @@ function applyImageZoom(img, zoomPercent) {
 // (usado tanto nos cards originais quanto nos criados pelo admin).
 function applyStockState(card, tagEl, addBtn, p) {
   const soldOut = !!p.soldOut;
+  const promo = !soldOut && !!p.oldPrice;
+
   card.classList.toggle("is-sold-out", soldOut);
+  card.classList.toggle("is-promo", promo);
+
   if (tagEl) {
     tagEl.textContent = soldOut ? "Esgotado" : (p.tag || "");
     tagEl.classList.toggle("product-tag-soldout", soldOut);
+    tagEl.classList.toggle("product-tag-promo", promo);
   }
   if (addBtn) {
     addBtn.disabled = soldOut;

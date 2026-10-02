@@ -528,6 +528,15 @@ section{
   vertical-align: 2%;
 }
 
+.product-price-old{
+  font-family: var(--cond);
+  font-weight: 600;
+  font-size: .78rem;
+  color: var(--text-faint);
+  text-decoration: line-through;
+  margin-right: .35rem;
+}
+
 .product-price-choose{
   font-family: var(--cond);
   font-weight: 600;
@@ -578,6 +587,23 @@ section{
 .product-tag.product-tag-soldout{
   background: linear-gradient(135deg, #4a4038, #2a2119);
   color: #d8cec3;
+}
+
+/* ---------- produto em promoção ---------- */
+.product-card.is-promo{
+  border-color: #cc5c01;
+}
+.product-tag.product-tag-promo{
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  border-radius: 0;
+  font-size: .95rem;
+  padding: .45rem .6rem;
+  background: #cc5c01;
+  color: #fff;
 }
 
 /* ---------- kits ---------- */
