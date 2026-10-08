@@ -170,17 +170,33 @@ function organizeSoldOutProducts() {
     );
 
     // só nas picanhas: do mais barato para o mais caro dentro de cada grupo
-    if (grid.dataset.category === "picanhas") {
-      const byPrice = (a, b) => cardPrice(a) - cardPrice(b);
-      promo.sort(byPrice);
-      available.sort(byPrice);
-      soldOut.sort(byPrice);
+        if (grid.dataset.category === "picanhas") {
+      promo.sort(byPicanhaOrder);
+      available.sort(byPicanhaOrder);
+      soldOut.sort(byPicanhaOrder);
     }
 
     [...promo, ...available, ...soldOut].forEach(card => {
       grid.appendChild(card);
     });
   });
+
+  function picanhaSortKey(card) {
+  const meta = (card.querySelector(".product-meta")?.textContent || "").toLowerCase();
+  const congelada = meta.includes("congelada");
+
+  let pin = 0;
+  if (card.dataset.key === "picanhas:estancia-92") pin = 1;      // último entre as resfriadas
+  if (card.dataset.key === "picanhas:selecao-contato") pin = -1; // primeiro entre as congeladas
+
+  return [congelada ? 1 : 0, pin, cardPrice(card)];
+}
+
+function byPicanhaOrder(a, b) {
+  const ka = picanhaSortKey(a);
+  const kb = picanhaSortKey(b);
+  return (ka[0] - kb[0]) || (ka[1] - kb[1]) || (ka[2] - kb[2]);
+}
 
   function cardPrice(card) {
     const { price } = parsePriceEl(card.querySelector(".product-price"));

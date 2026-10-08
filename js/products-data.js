@@ -42,7 +42,7 @@ const PRODUCTS = {
   bovinos: [
     { slug: "chorizo-estancia-92",    name: "CHORIZO ESTÂNCIA 92",                      price: "79,90", unit: "kg" },
     { slug: "fraldinha-extra-grill",  name: "FRALDINHA EXTRA GRILL",                    price: "59,90", unit: "kg" },
-    { slug: "fraldinha-fire",         name: "FRALDINHA FIRE",                           price: "49,90", unit: "kg",   soldOut: true }, 
+    { slug: "fraldinha-fire",         name: "FRALDINHA FIRE",                           price: "59,90", unit: "kg" }, 
     { slug: "ancho-grill",            name: "ANCHO GRILL",                              price: "64,90", unit: "kg" },
     { slug: "contra-file-cara-branca",name: "CONTRA FILÉ CARA BRANCA",                  price: "69,90", unit: "kg" },
     { slug: "contra-file-chef",       name: "CONTRA FILÉ CHEF",                         price: "66,90", unit: "kg",   soldOut: true },
