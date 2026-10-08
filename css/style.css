@@ -895,6 +895,27 @@ footer{
   transition: border-color .2s, color .2s;
 }
 .cart-toggle:hover{ border-color: var(--ember); color: var(--ember-2); }
+
+.product-cta{ position: relative; }
+
+.product-cta-badge{
+  position:absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--ember), var(--braise));
+  color: #150b06;
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: .68rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
 .cart-badge{
   position:absolute;
   top: -4px;

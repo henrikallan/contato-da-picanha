@@ -163,13 +163,29 @@ function organizeSoldOutProducts() {
   document.querySelectorAll(".cards-grid[data-category]").forEach((grid) => {
     const cards = Array.from(grid.querySelectorAll(".product-card"));
 
-    const available = cards.filter(card => !card.classList.contains("is-sold-out"));
+    const promo = cards.filter(card => card.classList.contains("is-promo"));
     const soldOut = cards.filter(card => card.classList.contains("is-sold-out"));
+    const available = cards.filter(card =>
+      !card.classList.contains("is-promo") && !card.classList.contains("is-sold-out")
+    );
 
-    [...available, ...soldOut].forEach(card => {
+    // só nas picanhas: do mais barato para o mais caro dentro de cada grupo
+    if (grid.dataset.category === "picanhas") {
+      const byPrice = (a, b) => cardPrice(a) - cardPrice(b);
+      promo.sort(byPrice);
+      available.sort(byPrice);
+      soldOut.sort(byPrice);
+    }
+
+    [...promo, ...available, ...soldOut].forEach(card => {
       grid.appendChild(card);
     });
   });
+
+  function cardPrice(card) {
+    const { price } = parsePriceEl(card.querySelector(".product-price"));
+    return price > 0 ? price : 1e9; // sem preço numérico vai para o fim do grupo
+  }
 }
 
 function customProductCardHTML(category, p) {
@@ -431,13 +447,25 @@ function setupProductQuickView() {
   }
 
   function stepProduct(direction) {
-    if (!currentCategory) return;
-    const list = Store.getCategoryProducts(currentCategory);
-    if (list.length < 2) return;
-    const index = list.findIndex((p) => p.slug === currentSlug);
-    const nextIndex = ((index === -1 ? 0 : index) + direction + list.length) % list.length;
-    goToProduct(currentCategory, list[nextIndex].slug);
-  }
+  if (!currentCategory) return;
+
+  // usa a ordem real dos cards na tela (promoção → normais → esgotados)
+  const cards = Array.from(
+    document.querySelectorAll(`.cards-grid[data-category="${currentCategory}"] .product-card`)
+  );
+  const slugs = cards
+    .map((card) => (card.dataset.key || "").split(":")[1])
+    .filter(Boolean);
+
+  const list = slugs.length
+    ? slugs
+    : Store.getCategoryProducts(currentCategory).map((p) => p.slug);
+
+  if (list.length < 2) return;
+  const index = list.indexOf(currentSlug);
+  const nextIndex = ((index === -1 ? 0 : index) + direction + list.length) % list.length;
+  goToProduct(currentCategory, list[nextIndex]);
+}
 
     prevProductBtn?.addEventListener("click", () => stepProduct(-1));
   nextProductBtn?.addEventListener("click", () => stepProduct(1));
@@ -1179,6 +1207,30 @@ function pulseCartBadge() {
   badge.classList.add("pulse");
 }
 
+function updateProductBadges(cart) {
+  document.querySelectorAll(".product-card[data-key]").forEach((card) => {
+    const key = card.dataset.key;
+    const qty = cart
+      .filter((i) => i.key === key || i.key.startsWith(key + ":"))
+      .reduce((sum, i) => sum + i.qty, 0);
+
+    const btn = card.querySelector(".add-cart-btn");
+    if (!btn) return;
+
+    let badge = btn.querySelector(".product-cta-badge");
+    if (qty > 0) {
+      if (!badge) {
+        badge = document.createElement("span");
+        badge.className = "product-cta-badge";
+        btn.appendChild(badge);
+      }
+      badge.textContent = qty;
+    } else if (badge) {
+      badge.remove();
+    }
+  });
+}
+
 function refreshCartUI() {
   const itemsWrap = document.getElementById("cartItems");
   const emptyMsg = document.getElementById("cartEmpty");
@@ -1188,6 +1240,7 @@ function refreshCartUI() {
   if (!itemsWrap) return;
 
   const cart = Store.getCart();
+  updateProductBadges(cart);
   badge.textContent = String(Store.cartCount());
   badge.style.display = Store.cartCount() > 0 ? "flex" : "none";
 
