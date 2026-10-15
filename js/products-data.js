@@ -22,6 +22,7 @@ const PRODUCTS = {
     { slug: "selecao-contato",    name: "PICANHA SELEÇÃO CONTATO",              origin: "Nacional",   storage: "Resfriada", price: "99,90",  unit: "kg" },
     { slug: "frigol-chef",        name: "PICANHA FRIGOL CHEF",                  origin: "Nacional",   storage: "Resfriada", price: "89,90",  unit: "kg",   soldOut: true },
     { slug: "pul",                name: "PICANHA PUL",                          origin: "Nacional",   storage: "Resfriada", price: "112,90", unit: "kg" },
+    { slug: "prime",              name: "PICANHA PRIME",                        origin: "Nacional",   storage: "Resfriada", price: "137,90", unit: "kg" },
     { slug: "chef",               name: "PICANHA CHEF",                         origin: "Nacional",   storage: "Resfriada", price: "115,90", unit: "kg",   soldOut: true },
     { slug: "estancia-92",        name: "PICANHA ESTÂNCIA 92",                  origin: "Nacional",   storage: "Resfriada", price: "144,90", unit: "kg" },
     { slug: "bassi",              name: "PICANHA BASSI",                        origin: "Nacional",   storage: "Resfriada", price: "144,90", unit: "kg",   soldOut: true },
