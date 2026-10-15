@@ -21,17 +21,18 @@ const PRODUCTS = {
   picanhas: [
     { slug: "selecao-contato",    name: "PICANHA SELEÇÃO CONTATO",              origin: "Nacional",   storage: "Resfriada", price: "99,90",  unit: "kg" },
     { slug: "frigol-chef",        name: "PICANHA FRIGOL CHEF",                  origin: "Nacional",   storage: "Resfriada", price: "89,90",  unit: "kg",   soldOut: true },
-    { slug: "pul",                name: "PICANHA PUL",                          origin: "Nacional",   storage: "Resfriada", price: "112,90", unit: "kg",   soldOut: true },
-    { slug: "chef",               name: "PICANHA CHEF",                         origin: "Nacional",   storage: "Resfriada", price: "115,90", unit: "kg" },
+    { slug: "pul",                name: "PICANHA PUL",                          origin: "Nacional",   storage: "Resfriada", price: "112,90", unit: "kg" },
+    { slug: "chef",               name: "PICANHA CHEF",                         origin: "Nacional",   storage: "Resfriada", price: "115,90", unit: "kg",   soldOut: true },
     { slug: "estancia-92",        name: "PICANHA ESTÂNCIA 92",                  origin: "Nacional",   storage: "Resfriada", price: "144,90", unit: "kg" },
     { slug: "bassi",              name: "PICANHA BASSI",                        origin: "Nacional",   storage: "Resfriada", price: "144,90", unit: "kg",   soldOut: true },
     { slug: "frigol",             name: "PICANHA FRIGOL",                       origin: "Nacional",   storage: "Resfriada", price: "107,90", unit: "kg" },
-    { slug: "brasa",              name: "PICANHA BRASA",                        origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg" },
+    { slug: "itacarne",           name: "PICANHA ITACARNE",                     origin: "Nacional",   storage: "Resfriada", price: "122,90", unit: "kg" },
+    { slug: "brasa",              name: "PICANHA BRASA",                        origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg",   soldOut: true },
     { slug: "dimeza",             name: "PICANHA DIMEZA",                       origin: "Nacional",   storage: "Resfriada", price: "117,90", unit: "kg",   soldOut: true },
-    { slug: "fire",               name: "PICANHA FIRE",                         origin: "Nacional",   storage: "Resfriada", price: "122,90", unit: "kg" },
+    { slug: "fire",               name: "PICANHA FIRE",                         origin: "Nacional",   storage: "Resfriada", price: "122,90", unit: "kg",   soldOut: true },
     { slug: "baby-novilho",       name: "PICANHA BABY NOVILHO",                 origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg",   soldOut: true },
     { slug: "diprima",            name: "PICANHA DIPRIMA",                      origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg",   soldOut: true },
-    { slug: "guarani",            name: "PICANHA GUARANI",                      origin: "Paraguaia",  storage: "Resfriada", price: "124,90", unit: "kg" },
+    { slug: "guarani",            name: "PICANHA GUARANI",                      origin: "Paraguaia",  storage: "Resfriada", price: "124,90", unit: "kg",   soldOut: true },
     { slug: "cabana-las-lilas",   name: "PICANHA CABAÑA LAS LILAS",             origin: "Uruguaia",   storage: "Congelada", price: "132,90", unit: "kg",   soldOut: true },
     { slug: "tacuarembo",         name: "PICANHA TACUAREMBÓ",                   origin: "Uruguaia",   storage: "Congelada", price: "129,90", unit: "kg" },
     { slug: "los lazos",          name: "PICANHA LOS LAZOS",                    origin: "Uruguaia",   storage: "Congelada", price: "132,90", unit: "kg" },
@@ -45,6 +46,7 @@ const PRODUCTS = {
     { slug: "fraldinha-extra-grill",  name: "FRALDINHA EXTRA GRILL",                    price: "59,90", unit: "kg" },
     { slug: "fraldinha-fire",         name: "FRALDINHA FIRE",                           price: "59,90", unit: "kg" }, 
     { slug: "ancho-grill",            name: "ANCHO GRILL",                              price: "64,90", unit: "kg" },
+    { slug: "ancho-frical",           name: "ANCHO PREMIUM FRICAL",                     price: "67,90", unit: "kg" },
     { slug: "contra-file-cara-branca",name: "CONTRA FILÉ CARA BRANCA",                  price: "69,90", unit: "kg" },
     { slug: "contra-file-chef",       name: "CONTRA FILÉ CHEF",                         price: "66,90", unit: "kg",   soldOut: true },
     { slug: "bananinha",              name: "BANANINHA",                                price: "55,90", unit: "kg" },
@@ -122,7 +124,7 @@ const PRODUCTS = {
           { name: "Alho Poró",            image:        "images/products/diversos/pao-marcas-sabores/ze-do-espeto-alho-poro.jpg" }
         ] },
 
-        { name: "Beagô", 
+        { name: "Beagô",
            image: "images/products/diversos/pao-marcas-sabores/beago.jpg",
              flavors: [
           { name: "Tradicional",           image:      "images/products/diversos/pao-marcas-sabores/beago-tradicional.jpg" },
@@ -134,7 +136,7 @@ const PRODUCTS = {
           { name: "Frango c/ Requeijão",   image: "images/products/diversos/pao-marcas-sabores/beago-frango-requeijao.jpg" }
         ] },
 
-        { name: "Dona Beth", 
+        { name: "Dona Beth", soldOut: true,
            image: "images/products/diversos/pao-marcas-sabores/dona-beth.jpg",
              flavors: [
           { name: "Alho Poró c/ Queijo Suíço",    image:     "images/products/diversos/pao-marcas-sabores/dona-beth-alho-poro.jpg" },
@@ -170,7 +172,8 @@ const PRODUCTS = {
         
       ] } ] } },
 
-    { slug: "picole-costelinha-queijo",   name: "PICOLÉ DE COSTELINHA C/ QUEIJO - 3 UN.",       price: "21,90" },
+    { slug: "salmao-chileno",             name: "SALMÃO CHILENO",             unit: "kg",     price: "94,90" },
+    { slug: "picole-costelinha-queijo",   name: "PICOLÉ DE COSTELINHA C/ QUEIJO - 3 UN.",     price: "21,90" },
     { slug: "camafeu",                    name: "CAMAFEU - CX 10 UN.",                        price: "32,90" },
     { slug: "camarao-espeto",             name: "CAMARÃO NO ESPETO - 7 UN.",                  price: "39,90" },
     { slug: "bolinho-bacalhau",           name: "BOLINHO DE BACALHAU - 15 UN.",               price: "21,90" },
@@ -178,29 +181,27 @@ const PRODUCTS = {
     { slug: "bolinho-copa-lombo",         name: "BOLINHO DE COPA LOMBO C/ QUEIJO & BARBECUE", price: "42,90" },
     { slug: "salsichao",                  name: "SALSICHÃO - 500g",                           price: "10,90" },
     { slug: "queijo-coalho",              name: "QUEIJO COALHO - 6 UN.",                      price: "29,90" },
+    { slug: "acendedor-fogaco",           name: "ACENDEDOR FOGAÇO - 1 UN",                    price:  "2,90" },
 
     { slug: "carvao-tamanhos", name: "CARVÃO", price: "ESCOLHA O TAMANHO",
       variants: { flavorLabel: "Tamanho", brands: [ { flavors: [
         { name: "Carvão 3kg",  price: "16,90", image:  "images/products/diversos/carvao-tamanhos.jpg" },
         { name: "Carvão 5kg",  price: "26,90", image:  "images/products/diversos/carvao-tamanhos.jpg" },
-        { name: "Carvão 10kg", price: "52,90", image: "images/products/diversos/carvao-tamanhos.jpg" }
+        { name: "Carvão 10kg", price: "52,90", image:  "images/products/diversos/carvao-tamanhos.jpg" }
       ] } ] } },
-
-    { slug: "acendedor-fogaco",           name: "ACENDEDOR FOGAÇO - 1 UN",                    price:  "2,90" },
-      
   ],
 
   molhos: [
     { slug: "molho-agridoce-ardencia", name: "MOLHO AGRIDOCE ARDÊNCIA EXÓTICA - 250ML", price: "18,90",
       variants: { brands: [ { flavors: [
         { name: "Cebola Caramelizada", image: "images/products/molhos/cebola-caramelizada.jpg" },
-        { name: "Jabuticaba",          image: "images/products/molhos/jabuticaba.jpg" },
-        { name: "Morango",             image: "images/products/molhos/morango.jpg" },
-        { name: "Picante",             image: "images/products/molhos/picante.jpg" },
-        { name: "Abacaxi",             image: "images/products/molhos/abacaxi.jpg" },
-        { name: "Maracujá",            image: "images/products/molhos/maracuja.jpg" },
-        { name: "Gengibre c/ Limão",   image: "images/products/molhos/gengibre-limao.jpg" },
-        { name: "Manga",               image: "images/products/molhos/manga.jpg" }
+        { name: "Jabuticaba",          image:          "images/products/molhos/jabuticaba.jpg" },
+        { name: "Morango",             image:             "images/products/molhos/morango.jpg" },
+        { name: "Picante",             image:             "images/products/molhos/picante.jpg" },
+        { name: "Abacaxi",             image:             "images/products/molhos/abacaxi.jpg" },
+        { name: "Maracujá",            image:            "images/products/molhos/maracuja.jpg" },
+        { name: "Gengibre c/ Limão",   image:      "images/products/molhos/gengibre-limao.jpg" },
+        { name: "Manga",               image:               "images/products/molhos/manga.jpg" }
       ] } ] } },
 
     { slug: "baconnaise-junior",     name: "BACONNAISE JUNIOR - 360g",             price: "26,90" },
@@ -208,13 +209,13 @@ const PRODUCTS = {
 
     { slug: "chimichurri",           name: "CHIMICHURRI",                   price: "19,90",
        variants: { brands: [ { flavors: [
-        { name: "Tradicional",       image: "images/products/molhos/chimichurri-tradicional.jpg" },
+        { name: "Tradicional",       image:     "images/products/molhos/chimichurri-tradicional.jpg" },
         { name: "Limão Siciliano",   image: "images/products/molhos/chimichurri-limao-siciliano.jpg" }
       ] } ] } },
 
-    { slug: "vinagrete-pimenta",     name: "VINAGRETE DE PIMENTA - 350g",            price: "32,90" },
+    { slug: "vinagrete-pimenta",     name: "VINAGRETE DE PIMENTA - 350g",                price: "32,90" },
     { slug: "azeite-alma-lusa",      name: "AZEITE EXTRA VIRGEM ALMA LUSA - 500ML",      price: "34,90" },
-    { slug: "melado-de-cana",        name: "MELADO DE CANA - 500ML",          price: "19,90" },
+    { slug: "melado-de-cana",        name: "MELADO DE CANA - 500ML",                     price: "19,90" },
   ],
 
 

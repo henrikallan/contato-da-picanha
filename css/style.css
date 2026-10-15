@@ -537,6 +537,8 @@ section{
   margin-right: .35rem;
 }
 
+.product-price-old:empty{ display: none; }
+
 .product-price-choose{
   font-family: var(--cond);
   font-weight: 600;
@@ -1642,6 +1644,14 @@ footer{
   background: linear-gradient(135deg, var(--ember), var(--braise));
   color: #150b06;
   font-weight: 600;
+}
+
+.variant-pill.is-sold-out{
+  opacity: .45;
+}
+.variant-pill.is-sold-out:hover{
+  border-color: var(--line);
+  color: var(--text-dim);
 }
 
 /* ---------- mãozinha em tudo que é clicável ---------- */

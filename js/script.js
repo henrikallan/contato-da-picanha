@@ -486,6 +486,12 @@ function setupProductQuickView() {
     prevProductBtn?.addEventListener("click", () => stepProduct(-1));
   nextProductBtn?.addEventListener("click", () => stepProduct(1));
 
+  function isBrandSoldOut(b) {
+  if (b.soldOut) return true;
+  const fl = b.flavors || [];
+  return fl.length > 0 && fl.every((f) => typeof f === "object" && f.soldOut);
+}
+
   // ---------- marca/sabor (produtos com variantes) ----------
     function renderVariants(p) {
     currentVariants = p.variants || null;
@@ -517,7 +523,10 @@ function setupProductQuickView() {
       flavorGroup.hidden = true;
       flavorOptions.innerHTML = "";
       brandOptions.innerHTML = brands
-        .map((b, i) => `<button type="button" class="variant-pill" data-brand-index="${i}">${escapeHTML(b.name)}</button>`)
+        .map((b, i) => {
+          const out = isBrandSoldOut(b);
+          return `<button type="button" class="variant-pill${out ? " is-sold-out" : ""}" data-brand-index="${i}"${out ? " disabled" : ""}>${escapeHTML(b.name)}${out ? " · Esgotado" : ""}</button>`;
+        })
         .join("");
     }
     updateAddButtonState();
@@ -533,24 +542,32 @@ function renderFlavorOptions(brand) {
   flavorPrevBtn.hidden = !hasMultiple;
   flavorNextBtn.hidden = !hasMultiple;
 
-  flavorOptions.innerHTML = flavors
+    flavorOptions.innerHTML = flavors
     .map((flavor, i) => {
       const name = typeof flavor === "object" ? flavor.name : flavor;
+      const out = typeof flavor === "object" && flavor.soldOut;
 
-      return `<button type="button" class="variant-pill" data-flavor-index="${i}">${escapeHTML(name)}</button>`;
+      return `<button type="button" class="variant-pill${out ? " is-sold-out" : ""}" data-flavor-index="${i}"${out ? " disabled" : ""}>${escapeHTML(name)}${out ? " · Esgotado" : ""}</button>`;
     })
     .join("");
 }
 
   // Seleciona o sabor pelo índice (usado tanto pelo clique direto na pílula
   // quanto pelas setas "‹ ›" que andam sabor a sabor, sem mexer na marca).
-  function selectFlavorByIndex(idx) {
+    function selectFlavorByIndex(idx, step = 1) {
   if (!selectedBrand) return;
 
   const flavors = selectedBrand.flavors || [];
   if (flavors.length === 0) return;
 
-  const i = ((idx % flavors.length) + flavors.length) % flavors.length;
+  const n = flavors.length;
+  let i = ((idx % n) + n) % n;
+
+  // pula sabores esgotados, andando na direção da seta
+  for (let t = 0; t < n && typeof flavors[i] === "object" && flavors[i].soldOut; t++) {
+    i = (i + step + n) % n;
+  }
+  if (typeof flavors[i] === "object" && flavors[i].soldOut) return; // todos esgotados
 
   selectedFlavor = flavors[i];
 
@@ -577,12 +594,12 @@ function renderFlavorOptions(brand) {
   flavorPrevBtn?.addEventListener("click", () => {
     if (!selectedBrand) return;
     const curIdx = selectedBrand.flavors.indexOf(selectedFlavor);
-    selectFlavorByIndex(curIdx === -1 ? 0 : curIdx - 1);
+    selectFlavorByIndex(curIdx === -1 ? 0 : curIdx - 1, -1);   // seta "‹"
   });
   flavorNextBtn?.addEventListener("click", () => {
     if (!selectedBrand) return;
     const curIdx = selectedBrand.flavors.indexOf(selectedFlavor);
-    selectFlavorByIndex(curIdx === -1 ? 0 : curIdx + 1);
+    selectFlavorByIndex(curIdx === -1 ? 0 : curIdx + 1, 1);    // seta "›"
   });
 
   flavorOptions?.addEventListener("click", (e) => {
