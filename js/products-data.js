@@ -32,7 +32,7 @@ const PRODUCTS = {
     { slug: "dimeza",             name: "PICANHA DIMEZA",                       origin: "Nacional",   storage: "Resfriada", price: "117,90", unit: "kg",   soldOut: true },
     { slug: "fire",               name: "PICANHA FIRE",                         origin: "Nacional",   storage: "Resfriada", price: "122,90", unit: "kg",   soldOut: true },
     { slug: "baby-novilho",       name: "PICANHA BABY NOVILHO",                 origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg",   soldOut: true },
-    { slug: "diprima",            name: "PICANHA DIPRIMA",                      origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg",   soldOut: true },
+    { slug: "diprima",            name: "PICANHA DIPRIMA",                      origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg" },
     { slug: "guarani",            name: "PICANHA GUARANI",                      origin: "Paraguaia",  storage: "Resfriada", price: "124,90", unit: "kg",   soldOut: true },
     { slug: "cabana-las-lilas",   name: "PICANHA CABAÑA LAS LILAS",             origin: "Uruguaia",   storage: "Congelada", price: "132,90", unit: "kg",   soldOut: true },
     { slug: "tacuarembo",         name: "PICANHA TACUAREMBÓ",                   origin: "Uruguaia",   storage: "Congelada", price: "129,90", unit: "kg" },
