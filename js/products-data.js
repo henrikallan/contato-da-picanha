@@ -28,7 +28,7 @@ const PRODUCTS = {
     { slug: "chef",               name: "PICANHA CHEF",                         origin: "Nacional",   storage: "Resfriada", price: "122,90", unit: "kg" },
     { slug: "estancia-92",        name: "PICANHA ESTÂNCIA 92",                  origin: "Nacional",   storage: "Resfriada", price: "144,90", unit: "kg" },
     { slug: "bassi",              name: "PICANHA BASSI",                        origin: "Nacional",   storage: "Resfriada", price: "144,90", unit: "kg",   soldOut: true },
-    { slug: "frigol",             name: "PICANHA FRIGOL",                       origin: "Nacional",   storage: "Resfriada", price: "107,90", unit: "kg" },
+    { slug: "frigol",             name: "PICANHA FRIGOL",                       origin: "Nacional",   storage: "Resfriada", price: "107,90", unit: "kg",   soldOut: true },
     { slug: "itacarne",           name: "PICANHA ITACARNE",                     origin: "Nacional",   storage: "Resfriada", price: "122,90", unit: "kg",   soldOut: true },
     { slug: "brasa",              name: "PICANHA BRASA",                        origin: "Nacional",   storage: "Resfriada", price: "119,90", unit: "kg",   soldOut: true },
     { slug: "dimeza",             name: "PICANHA DIMEZA",                       origin: "Nacional",   storage: "Resfriada", price: "117,90", unit: "kg",   soldOut: true },
