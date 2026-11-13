@@ -20,10 +20,10 @@ const PRODUCTS = {
 
   picanhas: [
     { slug: "selecao-contato",    name: "PICANHA SELEÇÃO CONTATO",              origin: "Nacional",   storage: "Resfriada", price: "99,90",  unit: "kg",   soldOut: true },
-    { slug: "frigol-chef",        name: "PICANHA FRIGOL CHEF",                  origin: "Nacional",   storage: "Resfriada", price: "89,90",  unit: "kg",   soldOut: true },
+    { slug: "frigol-chef",        name: "PICANHA FRIGOL CHEF",                  origin: "Nacional",   storage: "Resfriada", price: "109,90", unit: "kg" },
     { slug: "frialto",            name: "PICANHA FRIALTO",                      origin: "Nacional",   storage: "Resfriada", price: "110,90", unit: "kg" },
     { slug: "frical",             name: "PICANHA FRICAL PREMIUM",               origin: "Nacional",   storage: "Resfriada", price: "134,90", unit: "kg" },
-    { slug: "pul",                name: "PICANHA PUL",                          origin: "Nacional",   storage: "Resfriada", price: "112,90", unit: "kg" },
+    { slug: "pul",                name: "PICANHA PUL",                          origin: "Nacional",   storage: "Resfriada", price: "112,90", unit: "kg",   soldOut: true },
     { slug: "prime",              name: "PICANHA PRIME",                        origin: "Nacional",   storage: "Resfriada", price: "137,90", unit: "kg",   soldOut: true },
     { slug: "chef",               name: "PICANHA CHEF",                         origin: "Nacional",   storage: "Resfriada", price: "122,90", unit: "kg" },
     { slug: "estancia-92",        name: "PICANHA ESTÂNCIA 92",                  origin: "Nacional",   storage: "Resfriada", price: "144,90", unit: "kg" },
@@ -38,7 +38,7 @@ const PRODUCTS = {
     { slug: "guarani",            name: "PICANHA GUARANI",                      origin: "Paraguaia",  storage: "Resfriada", price: "124,90", unit: "kg",   soldOut: true },
     { slug: "cabana-las-lilas",   name: "PICANHA CABAÑA LAS LILAS",             origin: "Uruguaia",   storage: "Congelada", price: "132,90", unit: "kg",   soldOut: true },
     { slug: "tacuarembo",         name: "PICANHA TACUAREMBÓ",                   origin: "Uruguaia",   storage: "Congelada", price: "129,90", unit: "kg" },
-    { slug: "los lazos",          name: "PICANHA LOS LAZOS",                    origin: "Uruguaia",   storage: "Congelada", price: "132,90", unit: "kg" },
+    { slug: "los lazos",          name: "PICANHA LOS LAZOS",                    origin: "Uruguaia",   storage: "Congelada", price: "132,90", unit: "kg",   soldOut: true },
     { slug: "gorina",             name: "PICANHA GORINA",                       origin: "Argentina",  storage: "Congelada", price: "139,90", unit: "kg" },
     { slug: "cocarsa",            name: "PICANHA COCARSA",                      origin: "Argentina",  storage: "Congelada", price: "137,90", unit: "kg" },
     { slug: "selecao-contato-bdj",name: "PICANHA SELEÇÃO CONTATO - 500g",       origin: "Nacional",   storage: "Congelada", price: "69,90",  unit: "un" },
@@ -64,7 +64,7 @@ const PRODUCTS = {
     { slug: "chorizo-steak-500g",     name: "CHORIZO STEAK CONTATO - 500g",             price: "39,90", unit: "un" },
     { slug: "costela-premium",        name: "COSTELA BOVINA C/ QUEIJO - 450g",          price: "74,90" },
     { slug: "linguica-costela-plena", name: "LINGUIÇA DE COSTELA PLENA - 300g",         price: "13,90" },
-    { slug: "linguica-costela-angus", name: "LINGUIÇA DE COSTELA ANGUS - 300g",         price: "16,90" },
+    { slug: "linguica-costela-angus", name: "LINGUIÇA DE COSTELA ANGUS - 300g",         price: "17,90" },
     { slug: "linguica-costela-queijo",name: "LINGUIÇA DE COSTELA C/ QUEIJO - 420g",     price: "25,90",   soldOut: true },
     { slug: "hamburger-angus",        name: "HAMBÚRGUER ANGUS - CX 2 UN.",              price: "21,90",   soldOut: true },
     { slug: "alcatra-queijo-espeto",  name: "ALCATRA C/ QUEIJO NO ESPETO - 5 UN.",      price: "34,90",   soldOut: true },
@@ -165,7 +165,7 @@ const PRODUCTS = {
         { name: "Picante",     image:      "images/products/diversos/farofa-picante.jpg" }
       ] } ] } },
 
-    { slug: "choripan",                   name: "CHORIPAN - CX 400g",                         price: "29,90",
+    { slug: "choripan",                   name: "CHORIPAN - CX 400g",                         price: "32,90",
       variants: { brands: [ { flavors: [
         { name: "Suína - Quatro Queijos",                        image:     "images/products/diversos/choripan-quatro-queijos.jpg" },
         { name: "Suína - Abacaxi c/ Provolone",                  image:  "images/products/diversos/choripan-abacaxi-provolone.jpg" },
@@ -177,13 +177,14 @@ const PRODUCTS = {
       ] } ] } },
 
     { slug: "salmao-chileno",             name: "SALMÃO CHILENO",             unit: "kg",     price: "94,90" },
-    { slug: "picole-costelinha-queijo",   name: "PICOLÉ DE COSTELINHA C/ QUEIJO - 3 UN.",     price: "21,90" },
+    { slug: "picole-costelinha-queijo",   name: "PICOLÉ DE COSTELINHA C/ QUEIJO - 3 UN.",     price: "21,90", soldOut: true },
     { slug: "camafeu",                    name: "CAMAFEU - CX 10 UN.",                        price: "32,90" },
     { slug: "camarao-espeto",             name: "CAMARÃO NO ESPETO - 7 UN.",                  price: "39,90" },
     { slug: "bolinho-bacalhau",           name: "BOLINHO DE BACALHAU - 15 UN.",               price: "21,90" },
     { slug: "bolinho-costela",            name: "BOLINHO DE COSTELA C/ QUEIJO",               price: "42,90" },
     { slug: "bolinho-copa-lombo",         name: "BOLINHO DE COPA LOMBO C/ QUEIJO & BARBECUE", price: "42,90" },
     { slug: "salsichao",                  name: "SALSICHÃO - 500g",                           price: "10,90" },
+    { slug: "salsichao-trio",             name: "SALSICHÃO TRIO - 300g.",                     price: "13,90" },
     { slug: "queijo-coalho",              name: "QUEIJO COALHO - 6 UN.",                      price: "29,90" },
     { slug: "acendedor-fogaco",           name: "ACENDEDOR FOGAÇO - 1 UN",                    price:  "2,90" },
 
